@@ -1,4 +1,4 @@
-#**AI-Powered Recipe Generator**
+**AI-Powered Recipe Generator**
 
 This project leverages generative AI to simplify meal planning, inspire culinary creativity, and accommodate dietary preferences.
 
