@@ -1,0 +1,85 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CookBuddy</title>
+    <style>
+        body {
+            background: url('C:/Users/navya/Desktop/AnalyticsPracticum/CookBuddy/project_env/Scripts/Code/templates/food.jpg') center/cover no-repeat fixed; 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+        }
+
+        .title-container {
+            background-color: rgba(255, 255, 255, 0.7); 
+            text-align: center; 
+            padding: 20px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        h1 {
+            color: #333; 
+            font-size: 6em; 
+            font-weight: bold; 
+            margin: 0;
+        }
+
+        #inputForm {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px; 
+            margin: 20px auto; 
+            background-color: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; 
+        }
+
+        #user_input {
+            width: calc(100% - 20px); 
+            margin-bottom: 10px;
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+        }
+
+        button {
+            background-color: #4caf50; 
+            color: #fff;
+            padding: 10px;
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px; 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <h1>CookBuddy</h1>
+    </div>
+    <form id="inputForm">
+        <label for="userInput">Enter your cravings or ingredients:</label>
+        <br>
+        <textarea id="userInput" name="user_input" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response"></p>
+    <script>
+        const form = document.getElementById('inputForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const response = await fetch('/get_recipe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_input: document.getElementById('userInput').value })
+            });
+            const data = await response.json();
+            document.getElementById('response').innerText = data.response;
+        });
+    </script>
+</body>
+</html>
